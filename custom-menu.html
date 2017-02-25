@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义网页右键菜单</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			box-sizing: border-box;
+		}
+		body{
+			font-size: 20px;
+			font-family: "微软雅黑";
+			color: #333;
+		}
+		p{
+			width: 50%;
+			margin: 100px auto;
+			padding: 20px;
+			border: 1px solid #e2e2e2;
+			border-radius: 6px;
+			background-color: #f5f5f5;
+		}
+		ul{
+			position: absolute;
+			width: 200px;
+			border: 1px solid #e2e2e2;
+			background: #fff;
+			display: inline-block;
+			display: none;
+		}
+		li{
+			padding: 0 10px;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		li:hover{
+			background: #f5f5f5;
+		}
+	</style>
+</head>
+<body>
+	<p id="custom-menu">鼠标右击时，出现自定义菜单</p>
+	<ul id="menu">
+		<li class="item">html</li>
+		<li class="item">css</li>
+		<li class="item">JavaScript</li>
+	</ul>
+	<script>
+		var custom_menu = document.getElementById('custom-menu');
+		var menu = document.getElementById('menu');
+		var items = document.getElementsByClassName('item');
+		var ev = ev||event;
+		custom_menu.oncontextmenu=function(ev){
+			menu.style.display = "block";
+			menu.style.left = ev.clientX + "px";
+			menu.style.top = ev.clientY + "px";
+
+			return false;
+		}
+		document.onclick=function(){
+			menu.style.display = "none";
+		}
+		for (var i = 0; i <= items.length-1; i++) {
+			items[i].onclick=function(){
+				menu.style.display = "none";
+				alert(this.innerHTML);
+			}
+		}
+	</script>
+</body>
+</html>
